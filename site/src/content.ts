@@ -669,7 +669,7 @@ export const ui = {
   notFound: { en: "That page is not in the catalog.", zh: "目录里没有这一页。" },
   notFoundLink: { en: "Back to the range", zh: "回到产品线" },
   heroKicker: { en: "Aluminum · cabin-conscious", zh: "铝合金 · 以客舱为尺寸" },
-  heroTitle: { en: "Built for the overhead bin.", zh: "为客舱行李架而做。" },
+  heroTitle: { en: "Built for the\noverhead bin.", zh: "为客舱行李架\n而做。" },
   heroLede: {
     en: "Aluminum travel strollers, a slimmer umbrella fold, and balance bikes. One quiet line for families who move, and for the brands that sell to them.",
     zh: "铝合金旅行推车、更轻的伞车，以及儿童平衡车。一条给出行家庭、也给海外品牌的产品线。",

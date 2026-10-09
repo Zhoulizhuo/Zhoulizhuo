@@ -15,7 +15,13 @@ export function Home() {
       <section className="hero">
         <div className="hero-copy">
           <p className="kicker">{t(ui.heroKicker)}</p>
-          <h1>{t(ui.heroTitle)}</h1>
+          <h1>
+            {t(ui.heroTitle).split("\n").map((line) => (
+              <span className="hero-line" key={line}>
+                {line}
+              </span>
+            ))}
+          </h1>
           <p className="lede">{t(ui.heroLede)}</p>
           <div className="hero-actions">
             <Link className="btn" to="/product/cabin-one">
