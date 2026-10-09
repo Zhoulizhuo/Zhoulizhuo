@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { categories, choices, materials, ui } from "../content";
+import { brand, categories, choices, materials, ui } from "../content";
 import { useI18n } from "../i18n";
 import { usePageMeta } from "../meta";
 
 export function Home() {
   const { t } = useI18n();
   usePageMeta(
-    `${t({ en: "Aerly — cabin-ready children's mobility", zh: "艾黎 — 登机尺寸的儿童出行" })}`,
+    `${t({ en: `${brand.name} — cabin-ready children's mobility`, zh: `${brand.nameZh} — 登机尺寸的儿童出行` })}`,
     t(ui.heroLede),
   );
 

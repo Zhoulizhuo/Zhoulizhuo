@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { steps, ui } from "../content";
+import { brand, steps, ui } from "../content";
 import { useI18n } from "../i18n";
 import { usePageMeta } from "../meta";
 
 export function Partnership() {
   const { t } = useI18n();
   usePageMeta(
-    t({ en: "Partnership — Aerly", zh: "合作 — 艾黎" }),
+    t({ en: `Partnership — ${brand.name}`, zh: `合作 — ${brand.nameZh}` }),
     t(ui.partnerPageLede),
   );
 

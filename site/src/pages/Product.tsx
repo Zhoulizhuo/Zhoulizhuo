@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { findCategory, findProduct, productsIn, ui } from "../content";
+import { brand, findCategory, findProduct, productsIn, ui } from "../content";
 import { useI18n } from "../i18n";
 import { usePageMeta } from "../meta";
 import { NotFound } from "./NotFound";
@@ -16,7 +16,7 @@ export function Product() {
   }, [slug]);
 
   usePageMeta(
-    product ? `${product.name} — Aerly` : "Aerly",
+    product ? `${product.name} — ${brand.name}` : brand.name,
     product ? t(product.summary) : "",
   );
 

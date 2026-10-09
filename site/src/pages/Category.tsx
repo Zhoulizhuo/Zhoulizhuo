@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import {
   balanceCompare,
+  brand,
   findCategory,
   productsIn,
   travelCompare,
@@ -59,7 +60,7 @@ export function Category() {
   const { t } = useI18n();
 
   usePageMeta(
-    category ? `${t(category.title)} — Aerly` : "Aerly",
+    category ? `${t(category.title)} — ${brand.name}` : brand.name,
     category ? t(category.lede) : "",
   );
 

@@ -23,7 +23,13 @@ export function Contact() {
     if (isInterest(preset)) setInterest(preset);
   }, [preset]);
 
-  usePageMeta(t({ en: "Contact — Aerly", zh: "联系 — 艾黎" }), t(ui.contactLede));
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  usePageMeta(
+    t({ en: `Contact — ${brand.name}`, zh: `联系 — ${brand.nameZh}` }),
+    t(ui.contactLede),
+  );
 
   const interestLabel = useMemo(
     () => interests.find((item) => item.id === interest)?.label ?? interests[0].label,
@@ -62,11 +68,41 @@ export function Contact() {
       .filter((line, index, all) => line !== "" || all[index - 1] !== "")
       .join("\n");
 
-    const subject = `Aerly inquiry — ${t(interestLabel)}`;
+    const subject = `${brand.name} Inquiry — ${t(interestLabel)} (${name})`;
     const mailto = `mailto:${brand.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setDraft(`To: ${brand.email}\nSubject: ${subject}\n\n${body}`);
     setCopied(false);
-    window.location.href = mailto;
+
+    if (brand.formspreeEndpoint) {
+      setSubmitting(true);
+      fetch(brand.formspreeEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          country,
+          interest: t(interestLabel),
+          quantity,
+          message,
+          _subject: subject,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            setSubmitted(true);
+          } else {
+            window.location.href = mailto;
+          }
+        })
+        .catch(() => {
+          window.location.href = mailto;
+        })
+        .finally(() => setSubmitting(false));
+    } else {
+      window.location.href = mailto;
+    }
   }
 
   async function copyDraft() {
@@ -86,6 +122,34 @@ export function Contact() {
         <p className="lede">{t(ui.contactLede)}</p>
       </header>
       <section className="section">
+        <div className="contact-direct-card">
+          <p className="kicker">Direct Contact · 直接联络</p>
+          <div className="contact-methods">
+            <a href={`mailto:${brand.email}`} className="contact-method-item">
+              <span className="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Email</strong>
+                <span>{brand.email}</span>
+              </div>
+            </a>
+            <a href={`tel:${brand.phone}`} className="contact-method-item">
+              <span className="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Phone / WeChat / WhatsApp</strong>
+                <span>{brand.phoneDisplay}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
         <form className="form" onSubmit={onSubmit} noValidate>
           <label>
             {t(ui.form.name)}
@@ -125,19 +189,37 @@ export function Contact() {
             {errors.message ? <span className="field-error">{errors.message}</span> : null}
           </label>
           <div>
-            <button className="btn" type="submit">
-              {t(ui.form.submit)}
+            <button className="btn" type="submit" disabled={submitting}>
+              {submitting ? t(ui.form.submitting) : t(ui.form.submit)}
             </button>
             <p className="fine">{t(ui.form.note)}</p>
           </div>
         </form>
+
+        {submitted ? (
+          <div className="band" style={{ marginTop: "1.5rem", background: "var(--sage-deep)" }}>
+            <h3 style={{ margin: "0 0 0.5rem" }}>✓ {t(ui.form.successTitle)}</h3>
+            <p className="fine" style={{ color: "var(--paper)", margin: 0 }}>
+              {brand.email} · {brand.phoneDisplay}
+            </p>
+          </div>
+        ) : null}
+
         {draft ? (
           <div className="draft" style={{ marginTop: "1.2rem" }}>
             <strong>{t(ui.form.draft)}</strong>
             <pre>{draft}</pre>
-            <button className="btn btn-ghost" type="button" onClick={copyDraft}>
-              {copied ? t(ui.form.copied) : t(ui.form.copy)}
-            </button>
+            <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "center" }}>
+              <button className="btn btn-ghost" type="button" onClick={copyDraft}>
+                {copied ? t(ui.form.copied) : t(ui.form.copy)}
+              </button>
+              <a
+                className="btn btn-ghost"
+                href={`mailto:${brand.email}?subject=${encodeURIComponent(`${brand.name} Inquiry — ${t(interestLabel)}`)}&body=${encodeURIComponent(draft.split("\n\n").slice(1).join("\n\n"))}`}
+              >
+                {t(ui.form.openMailDraft)}
+              </a>
+            </div>
           </div>
         ) : null}
       </section>

@@ -5,7 +5,10 @@ import { usePageMeta } from "../meta";
 
 export function About() {
   const { t } = useI18n();
-  usePageMeta(t({ en: "About — Aerly", zh: "关于 — 艾黎" }), t(ui.aboutBody[0]));
+  usePageMeta(
+    t({ en: `About — ${brand.name}`, zh: `关于 — ${brand.nameZh}` }),
+    t(ui.aboutBody[0]),
+  );
 
   return (
     <div className="wrap">
@@ -20,10 +23,11 @@ export function About() {
           <p key={paragraph.en}>{t(paragraph)}</p>
         ))}
         <p>{t(ui.photoNote)}</p>
-        <p>
-          <a href={`mailto:${brand.email}`}>{brand.email}</a>
+        <p style={{ display: "grid", gap: "0.2rem", marginTop: "1rem" }}>
+          <a href={`mailto:${brand.email}`}>✉ {brand.email}</a>
+          <a href={`tel:${brand.phone}`}>✆ {brand.phoneDisplay}</a>
         </p>
-        <p>
+        <p style={{ marginTop: "1.4rem" }}>
           <Link className="btn" to="/contact">
             {t(ui.contact)}
           </Link>

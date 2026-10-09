@@ -36,8 +36,16 @@ export function Header() {
         {t(ui.skip)}
       </a>
       <NavLink to="/" className="logo" end>
-        <strong>{brand.name}</strong>
-        <span>{t(brand.tagline)}</span>
+        <span className="logo-brand">
+          <svg className="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" strokeWidth="1.3" opacity="0.25" />
+            <circle cx="16" cy="16" r="5" fill="currentColor" />
+            <path d="M16 2.5v4M16 25.5v4M2.5 16h4M25.5 16h4M6.5 6.5l3 3M22.5 22.5l3 3M6.5 25.5l3-3M22.5 9.5l3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+          <strong>{brand.name}</strong>
+          <span className="logo-sub">{locale === "zh" ? brand.nameZh : "KIDS MOBILITY"}</span>
+        </span>
+        <span className="logo-tagline">{t(brand.tagline)}</span>
       </NavLink>
       <nav className="desktop-nav" aria-label={t(ui.menu)}>
         {links.map((link) => (
@@ -64,7 +72,8 @@ export function Header() {
       </div>
       <dialog ref={dialogRef} className="nav-dialog" onClose={() => setMenuOpen(false)}>
         <div className="nav-dialog-bar">
-          <strong className="serif">{brand.name}</strong>
+          <span className="serif" style={{ fontSize: "1.8rem" }}>{brand.name}</span>
+          <span style={{ fontSize: "0.95rem", color: "var(--muted)", marginLeft: "0.4rem" }}>{brand.nameZh}</span>
           <button type="button" className="menu-button" onClick={closeMenu}>
             {t(ui.close)}
           </button>

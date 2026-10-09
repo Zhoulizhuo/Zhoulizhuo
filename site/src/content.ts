@@ -12,9 +12,12 @@ export type InterestId =
   | "other";
 
 export const brand = {
-  name: "Aerly",
-  nameZh: "艾黎",
-  email: "lili970@qq.com",
+  name: "SOLAERA",
+  nameZh: "十里阳光",
+  phone: "+86 18986460955",
+  phoneDisplay: "+86 189 8646 0955",
+  email: "zhoulizhuo182@gmail.com",
+  formspreeEndpoint: "",
   tagline: {
     en: "Cabin-ready children's mobility",
     zh: "登机尺寸的儿童出行",
@@ -686,12 +689,12 @@ export const ui = {
   aboutTitle: { en: "A catalog, before a factory tour.", zh: "先是一份目录，再是一次验厂。" },
   aboutBody: [
     {
-      en: "Aerly is a line of lightweight children's mobility: travel strollers, umbrella strollers, and balance bikes. The site is here so a buyer can see the difference between a cabin fold, an umbrella fold, and a first bike without a sales call.",
-      zh: "艾黎（Aerly）做轻量儿童出行：旅行推车、伞车和平衡车。这个网站让买家在打电话之前，就能分清客舱折叠、伞折，和孩子的第一辆两轮车。",
+      en: "SOLAERA (十里阳光) is an export-focused brand and manufacturer of lightweight children's mobility: aluminum travel strollers, compact umbrella strollers, and first balance bikes. The site is here so global buyers can review cabin specs, folded dimensions, and OEM workflows before requesting samples.",
+      zh: "十里阳光（SOLAERA）专注于高品质儿童出行产品的外贸与跨境出海：主营铝合金超轻便折叠旅行推车、便携伞车与儿童平衡车。建立这个网站，是让海外采购商与品牌伙伴在索样或验厂前，能清楚查阅客舱尺寸、折叠参数与贴牌合作流程。",
     },
     {
-      en: "We do not print a headcount, a floor area, or a wall of certification marks on the homepage. Those belong in a conversation, next to the report that matches the destination.",
-      zh: "首页不印人数、厂房面积，也不贴一排认证标志。这些该出现在谈话里，旁边是和目的地匹配的那份报告。",
+      en: "We believe children's mobility should combine aviation-level compactness with timeless design. We support OEM/ODM, private packaging, and international compliance testing tailored to your destination market.",
+      zh: "我们坚持让童车兼顾登机友好的紧凑结构与耐看克制的美学。我们支持 OEM/ODM 定制、专属包装与对应目标市场的国际标准合规测试。",
     },
   ],
   partnerPageLede: {
@@ -700,8 +703,8 @@ export const ui = {
   },
   contactTitle: { en: "Tell us the market.", zh: "把市场告诉我们。" },
   contactLede: {
-    en: "Model, destination, and a quantity range are enough to start. The button opens an email draft to us. It does not send mail by itself.",
-    zh: "型号、目的地和数量区间就够开始了。按钮会打开一封写给我们的邮件草稿，它本身不会把信发出去。",
+    en: "Model, destination market, and estimated volume are all we need to prepare pricing and specs. Direct mail: zhoulizhuo182@gmail.com · Tel/WhatsApp: +86 189 8646 0955.",
+    zh: "告知您感兴趣的型号、目标市场与采购数量，我们会在 24 小时内提供规格与报价方案。官方邮箱：zhoulizhuo182@gmail.com · 电话/微信/WhatsApp：+86 189 8646 0955。",
   },
   form: {
     name: { en: "Name", zh: "姓名" },
@@ -712,11 +715,17 @@ export const ui = {
     quantity: { en: "Quantity range", zh: "数量区间" },
     message: { en: "Message", zh: "留言" },
     optional: { en: "optional", zh: "选填" },
-    submit: { en: "Open email draft", zh: "打开邮件草稿" },
-    note: {
-      en: "Opens your mail app, addressed to lili970@qq.com.",
-      zh: "会打开你的邮件程序，收件人是 lili970@qq.com。",
+    submit: { en: "Send inquiry", zh: "发送询盘" },
+    submitting: { en: "Sending...", zh: "正在发送..." },
+    successTitle: {
+      en: "Inquiry received. We'll reply within 24 hours.",
+      zh: "询盘已收到，我们将在 24 小时内回复您。",
     },
+    note: {
+      en: "Direct to zhoulizhuo182@gmail.com · WhatsApp / Tel: +86 189 8646 0955",
+      zh: "直达邮箱 zhoulizhuo182@gmail.com · 电话 / 微信 / WhatsApp: +86 189 8646 0955",
+    },
+    openMailDraft: { en: "Or click to open mail client", zh: "或直接调用本地邮箱客户端" },
     draft: { en: "Draft", zh: "草稿" },
     copy: { en: "Copy draft", zh: "复制草稿" },
     copied: { en: "Copied", zh: "已复制" },
